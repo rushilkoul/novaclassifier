@@ -1,6 +1,17 @@
-
 from classifier import IntentClassifier
-from tools import TOOLMAP
+
+TOOLMAP = {
+    "searchWeb": "Web Search",
+    "searchYoutube": "YouTube Search",
+    "searchWikipedia": "Wikipedia Search",
+    "create_folder": "Create Folder",
+    "create_file": "Create File",
+    "read_file": "Read File",
+    "get_weather": "Get Weather",
+    "get_news": "Get News",
+    "convert_currency": "Convert Currency",
+}
+
 
 def ask_gemini(query: str) -> str:
     return f"send to gemini: \"{query}\""
@@ -17,9 +28,7 @@ def handle_query(classifier: IntentClassifier, query: str) -> str:
         result = ask_gemini(query)
         return f"classified as gemini material: {confidence:.0%} confident\n{result}"
 
-    tool_fn = TOOLMAP[intent]
-    result = tool_fn(query)
-    return f"{intent}: {confidence:.0%} confident\n{result}"
+    return f"{intent}: {confidence:.0%} confident"
 
 
 def main():

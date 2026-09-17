@@ -18,10 +18,10 @@ DEFAULT_MARGIN_THRESHOLD = 0.15
 def train_and_save():
     texts, labels = zip(*TRAINING_DATA)
 
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(ngram_range=(1, 2))
     X = vectorizer.fit_transform(texts)
 
-    clf = LogisticRegression(max_iter=1000)
+    clf = LogisticRegression(C=5.0, max_iter=1000)
     clf.fit(X, labels)
 
     MODEL_DIR.mkdir(exist_ok=True)
